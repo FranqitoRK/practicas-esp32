@@ -3,4 +3,4 @@ In this folder you will find two files very similar; the one called "semaforo.in
 
 For the second file named after the previous "semaforo-final.ino" is where I add another traffic light to check if it works correctly.
 
-(protoboard.jpg)
+![Image of the protoboard used to test both ".ino" files](https://github.com/FranqitoRK/practicas-esp32/blob/main/protoboard.jpg)
