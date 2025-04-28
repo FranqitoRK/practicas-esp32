@@ -1,5 +1,6 @@
 SemaphoreHandle_t mySemaphore;  // Declaramos el semáforo (mutex)
 int rojo0 = 32, ama0 = 13, ver0 = 12;
+int rojo1 = 14, ama1 = 27, ver1 = 25;
 
 void setup() {
   Serial.begin(115200);
@@ -7,6 +8,9 @@ void setup() {
   pinMode(rojo0,OUTPUT);
   pinMode(ama0,OUTPUT);
   pinMode(ver0,OUTPUT);
+  pinMode(rojo1,OUTPUT);
+  pinMode(ama1,OUTPUT);
+  pinMode(ver1,OUTPUT);
 
   mySemaphore = xSemaphoreCreateMutex();
 
@@ -41,7 +45,7 @@ void taskSemaphore(void *parameter) {
       Serial.print(coreID);
       Serial.println(" tiene el semáforo");
 
-    // Simulación de un semáforo
+    // Simulación de un semáforo para ambos cores
       if (coreID == 0) {
         digitalWrite(rojo0,LOW);
         digitalWrite(ver0, HIGH);
@@ -53,8 +57,14 @@ void taskSemaphore(void *parameter) {
         digitalWrite(rojo0, HIGH);
       }
       else if (coreID == 1) {
-        Serial.println("Esperando...");
-	vTaskDelay(pdMS_TO_TICKS(1500));
+        digitalWrite(rojo1,LOW);
+        digitalWrite(ver1, HIGH);
+        vTaskDelay(pdMS_TO_TICKS(2000));
+        digitalWrite(ver1,LOW);
+        digitalWrite(ama1, HIGH);
+        vTaskDelay(pdMS_TO_TICKS(500));
+        digitalWrite(ama1,LOW);
+        digitalWrite(rojo1, HIGH);
       }
       xSemaphoreGive(mySemaphore);
 
