@@ -1,0 +1,2 @@
+## Producer-Consumer | Second activity
+This code implements a simple producer-consumer system using FreeRTOS tasks on an ESP32. It uses a queue (FIFO) to pass integer IDs between two concurrent tasks running on separate CPU cores.
